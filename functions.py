@@ -1,6 +1,9 @@
 import itertools
 import random
 
+###TODO### 
+#Create boolean output functions to determine if module combo requirements of A-Level/FM are met 
+
 ###
 #container variables declared in optimize.py script. Commented here for reference. 
 #all_units = ['P1', 'P2', 'P3', 'P4', 'FP1', 'FP2', 'FP3', 'M1', 'M2', 'M3', 'S1', 'S2', 'S3', 'D1']
@@ -24,7 +27,7 @@ def overall_combos_A_level(compulsory_list, optional_combo_list):
   return overall_combo_list
 
 # function to create space of overall FM combination options
-def overall_combos_FM(compulsory_combo_list, optional_list):
+def overall_combos_FM_space(compulsory_combo_list, optional_list):
   overall_combo_list = []
   copy1 = optional_list.copy()
   copy2 = optional_list.copy()
@@ -43,7 +46,7 @@ def overall_combos_FM(compulsory_combo_list, optional_list):
   
   return overall_combo_list
 
-#function to create list of 3 element combinations from IA2_FM_units_list 
+#function to create list of all possible 3 element combinations from IA2_FM_units_list 
 def IA2_FM_units_combos(units_list):
   return list(itertools.combinations(units_list, 3))
 
