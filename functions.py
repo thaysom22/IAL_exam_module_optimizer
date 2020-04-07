@@ -51,33 +51,47 @@ def IA2_FM_units_combos(units_list):
   return list(itertools.combinations(units_list, 3))
 
 
-# function to store inputted module results as dict
-def input_modules_results(all_units):
+#function to input modules and results and return as dict
+def input_module_results(all_units):
   completed_module_results = {}
-  print('Enter UMS score for each unit.\nIf no result recorded for this unit enter: \'n\'\nWhen all results entered enter: \'d\'\n')
-
-  for unit in all_units:
-    unit_result = input('Enter {} UMS: '.format(unit))
-    if unit_result.lower() == 'd':
-      break
-    elif unit_result.lower() == 'n' or unit_result.lower() == '':
-      continue
+  print('Enter unit name and UMS score for each unit.\nWhen all results entered enter: \'done\'\n')
+  
+  temp_unit_title = input('Enter unit title: ').upper()
+  while temp_unit_title != 'DONE':
+    if temp_unit_title not in all_units.keys():
+      print('Enter valid unit title')
     else:
-      completed_module_results[unit] = int(unit_result)
+      temp_unit_result = input('Enter {} UMS score: '.format(temp_unit_title))
+      
+      while int(temp_unit_result) > 100 | int(temp_unit_result) < 0:
+        temp_unit_result = input('Enter an integer between 0 and 100: ') 
+      completed_module_results[temp_unit_title] = int(temp_unit_result)
+    
+    temp_unit_title = input('Enter unit title: ').upper()
+   
   return completed_module_results
 
-# function to return possible valid A-Level or FM combos with total scores as ordered list of tuples
-def valid_combos_ordered(completed, poss_combos):
+#function to return available valid 6 module combos from space of combination (A-Level or FM) with total scores as ordered (descending by total UMS) list of tuples
+def valid_combos_ordered(completed, combo_space):
   list_combo_totals = []
-  for combo in poss_combos:
-    if set(combo).issubset(set(list(completed.keys()))):
+  for combo in combo_space:
+    if set(combo).issubset(set(completed.keys())):
       combo_results = list(map(lambda module: completed[module], combo))
       list_combo_totals.append((tuple(combo), sum(combo_results)))
-  if list_combo_totals is not []:
+  if list_combo_totals:
     return sorted(list_combo_totals, key=lambda x:x[1], reverse=True)
   else:
-    return None
-
+    return False
+  
+#boolean function to check if valid combination and grade requirement met for A-level
+#available_combos variable stores return value of valid_combos_ordered function
+def A_level_pass_check(available_combos):
+  if available_combos:
+    if available_combos[0][1] >= grade_boundaries_dict['E']:
+      return True
+  return False  
+ 
+###BOOKMARK###
 # function to return max grade A to E possible (A-level or FM)
 def max_grade_A_to_E(combos_with_totals, grade_boundaries):
   for grade in ['A', 'B', 'C', 'D', 'E']:
