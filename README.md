@@ -16,7 +16,7 @@ Notes
 
 Modules in depository:
 
-optimize.py
+main.py
 This script calls functions from other modules in repository to implement optimization. Takes input or randomly generates module selection and results and outputs recommended combination and allocation of modules to maximise awarded grades. 
 
 functions.py
