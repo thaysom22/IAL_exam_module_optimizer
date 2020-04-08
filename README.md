@@ -19,8 +19,11 @@ Modules in depository:
 main.py
 This script calls functions from other modules in repository to implement optimization. Takes input or randomly generates module selection and results and outputs recommended combination and allocation of modules to maximise awarded grades. 
 
-functions.py
+optimization_functions.py
 This script contains function definitions of functions which are called in optimize.py script to facilitate objective of the program
+
+imput_functions.py
+functions to facilitate user input of data...
 
 tests.py
 This script contains tests....
