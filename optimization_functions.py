@@ -1,8 +1,4 @@
 import itertools
-import random
-
-###TODO### 
-#Create boolean output functions to determine if module combo requirements of FM are met 
 
 ###
 #container variables declared in optimize.py script. Commented here for reference. 
@@ -74,18 +70,22 @@ def max_grade_A_to_E(available_combos, grade_boundaries):
         return grade
     return False
 
-#boolean function to check if valid combination is available and total UMS requirement met for A-level pass (E or above)
+#boolean function to check if valid combination is available and total UMS requirement met for any A-level pass (E or above)
 #max_grade parameter stores return value of max_grade_A_to_E function
 def A_level_pass_check(max_grade):
   if max_grade:
     return True
-  return False  
+  return False
 
-#boolean function to check if valid combination is available and total UMS requirement met for FM pass (E or above)
-#max_grade parameter stores return value of max_grade_A_to_E function
+#boolean function to check if valid combination is available for FM requirements
+#A_level pass parameter stores boolean return value if A_level_pass_check function
+def FM_module_requirements_check(A_level_pass, completed):
+  if A_level_pass & len(completed) >= 12 & \ 
+(('FP1' in completed.keys() & 'FP2' in completed.keys()) | ('FP1' in completed.keys() & 'FP3' in completed.keys())):
+    return True
+  return False
 
-
-#function to return only valid combos (ordered) with total above minimum (int) from available_combos (list of tuples of combo tuples with totals) 
+#function to return only valid combos (ordered) with total above a minimum (int) from available_combos (list of tuples of combo tuples with totals) 
 def filter_above_total(available_combos, minimum):
   filtered_list = list(filter(lambda x : x[1] >= minimum, available_combos))
   return sorted(filtered_list, key=lambda x:x[1], reverse=True)
