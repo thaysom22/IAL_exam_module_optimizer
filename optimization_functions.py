@@ -1,21 +1,8 @@
 import itertools
 
-###
-#container variables declared in optimize.py script. Commented here for reference. 
-#all_units = ['P1', 'P2', 'P3', 'P4', 'FP1', 'FP2', 'FP3', 'M1', 'M2', 'M3', 'S1', 'S2', 'S3', 'D1']
-#IAS_units = ['P1', 'P2', 'FP1', 'M1', 'S1', 'D1']
-#IA2_FM_units_list = ['FP2', 'FP3', 'M2', 'M3', 'S2', 'S3']
-#A_level_compulsory_units = ['P1', 'P2', 'P3', 'P4']
-#A_level_optional_units = ['D1', 'M1', 'S1', 'M2', 'S2']
-#A_level_optional_valid_combos = [['M1', 'M2'], ['S1', 'S2'], ['M1', 'S1'], ['D1', 'S1'], ['D1', 'M1']]
-#FM_compulsory_combos = [['FP1', 'FP2'], ['FP1', 'FP3']] 
-#FM_optional_units = ['FP2', 'FP3', 'M1', 'M2', 'M3', 'S1', 'S2', 'S3', 'D1']
-#FM_optional_valid_combos = [['FP1', 'FP2'], ['FP1', 'FP3']]
-#grade_boundaries_dict = {'A':480, 'B':420, 'C':360, 'D':300, 'E':240}
-###
 
 # function to create space of overall A-Level valid module combinations
-def overall_combos_A_level(compulsory_list, optional_combo_list):
+def overall_combos_A_level_space(compulsory_list, optional_combo_list):
   overall_combo_list = []
   for optional_combo in optional_combo_list:
     overall_combo = compulsory_list + optional_combo
