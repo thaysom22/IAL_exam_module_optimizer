@@ -33,7 +33,26 @@ def overall_combos_FM_space(compulsory_combo_list, optional_list):
 def IA2_FM_units_combos_space(units_list):
   return list(itertools.combinations(units_list, 3))
 
-
+#boolean function to check if valid combination is available for A-level requirements
+#compulsory parameter stores A_level_compulsory_units list
+#optional parameter stores A_level_optional_valid_combos list of combos
+A_level_module_requirements_check(completed, compulsory, optional):
+  if len(completed) >= 6:
+    completed_module_names = list(completed.keys())
+    if all(list(map(lambda x: x in completed_module_names, compulsory))) /
+& any([(combo[0] in completed_module_names & combo[1] in completed_module_names) /
+for combo in optional]):
+       return True
+  return False
+       
+#boolean function to check if valid combination is available for FM requirements
+#compulsory parameter stores FM_compulsory_valid_combos list of combos
+def FM_module_requirements_check(completed, compulsory):
+  if len(completed) >= 12:
+    completed_module_names = list(completed.keys())
+    if any([(combo[0] in completed_module_names & combo[1] in completed_module_names) for combo in compulsory]):
+      return True
+  return False
 
 #function to return available valid 6 module combos from space of combination (A-Level or FM) or 3 module combos for IA2 FM units
 # with total scores as ordered (descending by total UMS) list of tuples
@@ -57,20 +76,6 @@ def max_grade_A_to_E(available_combos, grade_boundaries):
         return grade
     return False
 
-#boolean function to check if valid combination is available and total UMS requirement met for any A-level pass (E or above)
-#max_grade parameter stores return value of max_grade_A_to_E function
-def A_level_pass_check(max_grade):
-  if max_grade:
-    return True
-  return False
-
-#boolean function to check if valid combination is available for FM requirements
-#A_level pass parameter stores boolean return value if A_level_pass_check function
-def FM_module_requirements_check(A_level_pass, completed):
-  if A_level_pass & len(completed) >= 12 & \ 
-(('FP1' in completed.keys() & 'FP2' in completed.keys()) | ('FP1' in completed.keys() & 'FP3' in completed.keys())):
-    return True
-  return False
 
 #function to return only valid combos (ordered) with total above a minimum (int) from available_combos (list of tuples of combo tuples with totals) 
 def filter_above_total(available_combos, minimum):
