@@ -55,7 +55,7 @@ def FM_module_requirements_check(completed, compulsory):
   return False
 
 #function to return available valid 6 module combos from space of combination (A-Level or FM) or 3 module combos for IA2 FM units
-# with total scores as ordered (descending by total UMS) list of tuples
+#with total scores as ordered (descending by total UMS) list of tuples
 def available_combos_ordered(completed, combo_space):
   list_combo_totals = []
   for combo in combo_space:
@@ -82,10 +82,20 @@ def filter_above_total(available_combos, minimum):
   filtered_list = list(filter(lambda x : x[1] >= minimum, available_combos))
   return sorted(filtered_list, key=lambda x:x[1], reverse=True)
 
+#boolean function to determine if A_star at A-level is awarded
+#max_A_level_grade parameter stores return value of max_grade_A_to_E \
+#with first positional arg of A_level_available_combos_and_totals
+def bool_A_level_A_star(completed, max_A_level_grade):
+  if max_A_level_grade == 'A':
+    sum_P3_P4 = completed['P3'] + completed['P4']
+    if sum_P3_P4 >= 180:
+      return True
+  return False
+  
 #boolean function to determine if A_star at FM is possible for any available valid combo of FM modules
 #IA2_available_A_star_combos stores return value of filter_above_total with argument of available valid IA2 FM unit combos
 #max_grade_FM parameter stores return value of max_grade_A_to_E with argument of available FM combos
-def bool_FM_A_star_possible(IA2_available_A_star_combos, max_grade_FM):
+def bool_FM_A_star(IA2_available_A_star_combos, max_grade_FM):
   if max_grade_FM == 'A':
     if IA2_available_A_star_combos:
       return True
