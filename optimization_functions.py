@@ -134,7 +134,9 @@ def overall_available_combos_and_totals(A_level_combos, FM_combos):
 def max_available_overall_combo(list_of_available_overall_combos):
   return list_of_available_overall_combos[0]
 
-
+#function to reduce the best possible grade by one grade
+def reduce_best_grade(grade):
+  return chr(ord(grade) + 1)
    
 
 
