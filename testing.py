@@ -34,6 +34,28 @@ def generate_random_module_results(A_level_compulsory_units, A_level_optional_va
     
   return module_results
     
-    
+#print tests
+#print('Ordered list of valid A-level module combos as tuples with totals:')
+#print(A_level_valid_combos_and_totals)
+#print()
+#print('Ordered list of valid FM module combos as tuples with totals:')
+#print(FM_valid_combos_and_totals)
+#print()
+#print('Ordered list of valid A-level module combos satisfying max grade requirement as tuples with totals:')
+#print(grade_A_level_valid_combos_and_totals)
+#print()
+#print('Ordered list of valid FM module combos satisfying max grade requirement as tuples with totals:')
+#print(grade_FM_valid_combos_and_totals)
+#print()
+#print('A* at FM possible?')
+#print(bool_FM_A_star)
+#print()
+#print('Best grades possible individually:')
+#print('Best grade A to E at A-level possible:')
+#print(A_level_best_grade)
+#print()
+#print('Best grade A to E at FM possible:')
+#print(FM_best_grade)
+#print()   
   
    
