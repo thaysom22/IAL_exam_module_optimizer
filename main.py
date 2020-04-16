@@ -1,7 +1,3 @@
-###TODO###
-
-#Complete README file
-
 import sys
 
 from optimization_functions import *
@@ -22,9 +18,9 @@ grade_boundaries_dict = {'A':480, 'B':420, 'C':360, 'D':300, 'E':240}
 
 while 1:
   #testing
-  completed_module_results = {'P2': 20, 'P3': 20, 'P4': 10, 'M1': 85, 'M2': 10, 'S1': 100, 'S2': 10, 'D1': 20, 'FP1': 60, 'FP3': 80, 'S2': 81, 'FP2': 75, 'P1': 60, 'S3': 50}
+  #completed_module_results = {'P2': 20, 'P3': 20, 'P4': 10, 'M1': 85, 'M2': 10, 'S1': 100, 'S2': 10, 'D1': 20, 'FP1': 60, 'FP3': 80, 'S2': 81, 'FP2': 75, 'P1': 60, 'S3': 50}
 
-  #completed_module_results = input_module_results(all_units)
+  completed_module_results = input_module_results(all_units)
   print()
   print('Completed module results: ')
   print(completed_module_results)
