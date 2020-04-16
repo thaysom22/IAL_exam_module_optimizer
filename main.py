@@ -1,12 +1,13 @@
 ###TODO###
-#Add function to optimization_functions to perform A* check for A-level
+
 #Complete README file
 
 import sys
 
-
 from optimization_functions import *
 from input_functions import *
+from testing import *
+
 
 #declare container variables
 all_units = ['P1', 'P2', 'P3', 'P4', 'FP1', 'FP2', 'FP3', 'M1', 'M2', 'M3', 'S1', 'S2', 'S3', 'D1']
@@ -20,19 +21,19 @@ FM_optional_units = ['FP2', 'FP3', 'M1', 'M2', 'M3', 'S1', 'S2', 'S3', 'D1']
 grade_boundaries_dict = {'A':480, 'B':420, 'C':360, 'D':300, 'E':240}
 
 while 1:
-  
-  #Input module results \
-  #then perform 'less computationally demanding' initial combinations checks before generating overall space or \
-  #available set of combinations
-  print('Enter completed module results: ') 
-  completed_module_results = input_module_results(all_units)
-  print('Completed module results as dict:')
+  #testing
+  completed_module_results = {'P2': 20, 'P3': 20, 'P4': 10, 'M1': 85, 'M2': 10, 'S1': 100, 'S2': 10, 'D1': 20, 'FP1': 60, 'FP3': 80, 'S2': 81, 'FP2': 75, 'P1': 60, 'S3': 50}
+
+  #completed_module_results = input_module_results(all_units)
+  print()
+  print('Completed module results: ')
   print(completed_module_results)
   print()
   A_level_combos_check = A_level_module_requirements_check(completed_module_results, A_level_compulsory_units, \
 A_level_optional_valid_combos)
   if not A_level_combos_check:
     print('No valid A-level combination is available')
+    input()
     continue
   print('Valid A-level combination is available')
   #create space of valid combos for A-level by calling function invoking itertools
@@ -43,6 +44,7 @@ A_level_optional_valid_combos)
   A_level_best_grade = max_grade_A_to_E(A_level_available_combos_and_totals, grade_boundaries_dict)
   if not A_level_best_grade:
     print('Total UMS requirement for A-level minimum grade not met')
+    input()
     continue
   print('Total UMS requirement for A-level minimum grade met')
   FM_combos_check = FM_module_requirements_check(completed_module_results, FM_compulsory_valid_combos)
@@ -56,7 +58,8 @@ A_level_optional_valid_combos)
     else:
       print('A-level: {}'.format(A_level_best_grade))
     A_level_only_max_combo = max_available_overall_combo(A_level_available_combos_and_totals)
-    print(A_level_only_max_combo)  
+    #display optimum overall A-level combo      
+    display_modules(A_level_only_max_combo)
     sys.exit()
   print('Valid FM combination is available')
   break
@@ -88,7 +91,7 @@ if bool_FM_A_star:
   #create list of tuples of available overall FM combos that satify A* requirements
   #if bool_FM_A_star boolean function returns 'True' then FM_best_grade_combos_and_totals will contain only A grade combos
   overall_available_FM_A_star_combos = available_overall_A_star_FM_combos\
-  (FM_best_grade_combos_and_totals, IA2_units_available_A_star_combo)
+  (FM_best_grade_combos_and_totals, IA2_units_available_A_star_combos)
   #create list of tuples of available overall combos which satisfy A-level best possible grade and FM A* requirements
   overall_A_level_and_FM_A_star = overall_available_combos_and_totals\
 (A_level_best_grade_combos_and_totals, overall_available_FM_A_star_combos)
@@ -101,9 +104,8 @@ if bool_FM_A_star:
     else:
       print('A-level: {}'.format(A_level_best_grade))
     print('FM: A*')
-    print('Overall combo with max sum of overall A-level and overall FM total:')
-    print(max_combo)
-    print()
+    #display optimum overall combo
+    display_modules(max_combo)
     sys.exit()  
 
 #if A* at FM not possible or no combination satisfying A-level best possible grade requirements and FM A* requirements\
@@ -119,7 +121,7 @@ orginial_A_level_best_grade = A_level_best_grade
 original_FM_best_grade = FM_best_grade
 while overall_A_level_and_FM == []:
   # print to show user grades have been reduced  
-  print('Reducing best grade as no available overall combos satisfying current best grades exist')
+  print('Reducing best grade as no available overall combos satisfying current best grades exists')
   FM_best_grade = reduce_best_grade(FM_best_grade)
   #if FM_best_grade is reducd to F (fail) then reduce A_level_best_grade and reset FM_best_grade to original 
   if FM_best_grade == 'F':
@@ -135,8 +137,8 @@ while overall_A_level_and_FM == []:
       print('A-level: A*')
     else:
       print('A-level: {}'.format(A_level_best_grade))
-    print('Overall combo with max sum of overall A-level and overall FM total:')
-    print(A_level_only_max_combo)
+    #display optimum overall A-level combo      
+    display_modules(A_level_only_max_combo)
     sys.exit()
   
   #recalculate A-level, FM and overall available combos and totals for reduced best grades
@@ -151,16 +153,9 @@ while overall_A_level_and_FM == []:
 if bool_A_level_A_star(completed_module_results, A_level_best_grade):
   print('A-level: A*')
 else:
-  print('A-level: {}'.format(A_level_best_grade))
-print('FM: {}'.format(FM_best_grade)
+  print('A-level grade: {}'.format(A_level_best_grade))
+
+print('FM grade: {}'.format(FM_best_grade))
+#calculate and display optimum overall combo
 max_combo = max_available_overall_combo(overall_A_level_and_FM)      
-print('Overall combo with max sum of overall A-level and overall FM total:')
-print(max_combo)  
-  
-  
- 
-
-
-
-
-
+display_modules(max_combo)

@@ -1,6 +1,6 @@
 import random
 
-from functions import overall_combos_FM
+from optimization_functions import overall_combos_FM_space
 
 #container variables declared in optimize.py script.
 all_units = ['P1', 'P2', 'P3', 'P4', 'FP1', 'FP2', 'FP3', 'M1', 'M2', 'M3', 'S1', 'S2', 'S3', 'D1']
@@ -21,7 +21,7 @@ def generate_random_module_results(A_level_compulsory_units, A_level_optional_va
   for unit in A_level_compulsory_units:
     module_results[unit] = random.randint(40, 100)
   
-  A_level_option_combo = random.choice(A_level_optional_valid_combos):
+  A_level_option_combo = random.choice(A_level_optional_valid_combos)
   for unit in A_level_option_combo:   
     module_results[unit] = random.randint(40, 100)
     FM_optional_units.remove(unit)
@@ -34,6 +34,23 @@ def generate_random_module_results(A_level_compulsory_units, A_level_optional_va
     
   return module_results
     
+#Input module results \
+#then perform 'less computationally demanding' initial combinations checks before generating overall space or \
+#available set of combinations
+
+#print('Run a test by randomly generating set of module results?')
+#test = input('Enter \'Y\' or \'N\': ')
+
+#if test.upper() == 'Y':
+  # completed_module_results = generate_random_module_results(A_level_compulsory_units, A_level_optional_valid_combos, FM_compulsory_valid_combos, FM_optional_units)
+#else:
+#  completed_module_results = input_module_results(all_units)
+
+
+
+
+
+
 #print tests
 #print('Ordered list of valid A-level module combos as tuples with totals:')
 #print(A_level_valid_combos_and_totals)
@@ -56,6 +73,4 @@ def generate_random_module_results(A_level_compulsory_units, A_level_optional_va
 #print()
 #print('Best grade A to E at FM possible:')
 #print(FM_best_grade)
-#print()   
-  
-   
+#print() 

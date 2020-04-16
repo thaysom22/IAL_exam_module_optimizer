@@ -1,4 +1,3 @@
-
 #function to input modules and results and return as dict
 def input_module_results(all_units):
   completed_module_results = {}
@@ -6,7 +5,7 @@ def input_module_results(all_units):
   
   temp_unit_title = input('Enter unit title: ').upper()
   while temp_unit_title != 'DONE':
-    if temp_unit_title not in all_units.keys():
+    if temp_unit_title not in all_units:
       print('Enter valid unit title')
     else:
       temp_unit_result = input('Enter {} UMS score: '.format(temp_unit_title))

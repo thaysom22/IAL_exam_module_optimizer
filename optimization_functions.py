@@ -22,10 +22,10 @@ def overall_combos_FM_space(compulsory_combo_list, optional_list):
   FM_optional_combos_no_FP3 = list(itertools.combinations(FM_optional_list_no_FP3, 4))
  
   for optional_combo in FM_optional_combos_no_FP2:
-    overall_combo_list.append(compulsory_combo_list[0] + option_combo)
+    overall_combo_list.append(compulsory_combo_list[0] + list(optional_combo))
 
   for option_combo in FM_optional_combos_no_FP3:
-    overall_combo_list.append(compulsory_combo_list[1] + option_combo)
+    overall_combo_list.append(compulsory_combo_list[1] + list(optional_combo))
   
   return overall_combo_list
 
@@ -36,12 +36,12 @@ def IA2_FM_units_combos_space(units_list):
 #boolean function to check if valid combination is available for A-level requirements
 #compulsory parameter stores A_level_compulsory_units list
 #optional parameter stores A_level_optional_valid_combos list of combos
-A_level_module_requirements_check(completed, compulsory, optional):
+def A_level_module_requirements_check(completed, compulsory, optional):
   if len(completed) >= 6:
     completed_module_names = list(completed.keys())
-    if all(list(map(lambda x: x in completed_module_names, compulsory))) /
-& any([(combo[0] in completed_module_names & combo[1] in completed_module_names) /
-for combo in optional]):
+    if all(list(map(lambda x: x in completed_module_names, compulsory)))\
+& any([(combo[0] in completed_module_names) & (combo[1] in\
+completed_module_names) for combo in optional]):
        return True
   return False
        
@@ -50,7 +50,7 @@ for combo in optional]):
 def FM_module_requirements_check(completed, compulsory):
   if len(completed) >= 12:
     completed_module_names = list(completed.keys())
-    if any([(combo[0] in completed_module_names & combo[1] in completed_module_names) for combo in compulsory]):
+    if any([(combo[0] in completed_module_names) & (combo[1] in completed_module_names) for combo in compulsory]):
       return True
   return False
 
@@ -137,7 +137,19 @@ def max_available_overall_combo(list_of_available_overall_combos):
 #function to reduce the best possible grade by one grade
 def reduce_best_grade(grade):
   return chr(ord(grade) + 1)
-   
 
+#function to display recommendation to user
+def display_modules(max_tuple):
+  if len(max_tuple[0]) >= 12:
+    print('Optimized for max sum of overall A-level total and overall FM total')
+    print('A-level modules: {}'.format(max_tuple[0][:6]))
+    print('A-level total: {}'.format(max_tuple[1]))
+    print('FM modules: {}'.format(max_tuple[0][6:]))
+    print('FM total: {}'.format(max_tuple[2]))
+  else:
+    print('Optimized for max overall A-level total')
+    print('A-level modules: {}'.format(max_tuple[0][:6]))
+    print('A-level total: {}'.format(max_tuple[1]))
+    
 
-
+  
