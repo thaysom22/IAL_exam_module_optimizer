@@ -1,4 +1,7 @@
 # IAL_exam_module_optimizer
+
+[![Run on Repl.it](https://repl.it/badge/github/thaysom22/IAL_exam_module_optimizer)](https://repl.it/github/thaysom22/IAL_exam_module_optimizer)
+
 Python application to optimize module allocations for Pearson Edexcel International A-Level (IAL) Mathematics and Further Mathematics (2018). 
 
 The purpose of this application is to take a set of module names and results from the user and output how the modules should be allocated to acquire the best grade (A* to E) possible in the A-Level Mathematics and the Further Mathematics (FM) awards. 
